@@ -3,8 +3,11 @@
     <ComicDetail v-if="comicOfTheWeek" :comic="comicOfTheWeek" />
     <Spinner v-else />
   </div>
-  <div class="container grid-area">
-    <ComicCard v-for="comic in getComics" :key="comic.id" :comic="comic" />
+  <div class="container">
+    <h2 class="section-title">Comics</h2>
+    <div class="grid-area">
+      <ComicCard v-for="comic in getComics" :key="comic.id" :comic="comic" />
+    </div>
   </div>
 </template>
 
@@ -52,11 +55,3 @@ export default {
 };
 
 </script>
-<style lang="scss" >
-.grid-area {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-</style>>

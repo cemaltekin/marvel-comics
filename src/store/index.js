@@ -2,28 +2,32 @@ import { createStore } from 'vuex';
 import md5 from 'md5';
 import axios from 'axios';
 
-const publicKey = 'd34ea269d99edbd46f157b69213c4415'; // API anahtarınızı buraya yerleştirin
-const privateKey = 'aea8eaf50fc8406cc7019c004fdb6da827e1b101'; // Özel anahtarınızı buraya yerleştirin
+const publicKey = 'd34ea269d99edbd46f157b69213c4415'; 
+const privateKey = 'aea8eaf50fc8406cc7019c004fdb6da827e1b101'; 
 
 export default createStore({
   state: {
     comics: null,
-    favorites: [], // Yeni state: favorites
+    favorites: [],
+    hamburgerIsVisible: false,
   },
   getters: {
     getComics: state => state.comics,
-    getFavorites: state => state.favorites, // Yeni getter: getFavorites
+    getFavorites: state => state.favorites, 
   },
   mutations: {
     setComics: (state, comics) => {
       state.comics = comics;
     },
     addToFavorites: (state, comic) => {
-      state.favorites.push(comic); // Favoriye ekleme işlemi
+      state.favorites.push(comic); 
     },
     removeFromFavorites: (state, comicId) => {
-      state.favorites = state.favorites.filter(comic => comic.id !== comicId); // Favorilerden kaldırma işlemi
+      state.favorites = state.favorites.filter(comic => comic.id !== comicId); 
     },
+    setHamburgerIsVisible: (state, hamburgerIsVisible) => {
+      state.hamburgerIsVisible = hamburgerIsVisible
+    }
   },
   actions: {
     fetchComics({ commit }) {
@@ -41,10 +45,10 @@ export default createStore({
         });
     },
     addToFavorites({ commit }, comic) {
-      commit('addToFavorites', comic); // Favoriye ekleme işlemini tetikle
+      commit('addToFavorites', comic); 
     },
     removeFromFavorites({ commit }, comicId) {
-      commit('removeFromFavorites', comicId); // Favorilerden kaldırma işlemini tetikle
+      commit('removeFromFavorites', comicId); 
     },
   },
 

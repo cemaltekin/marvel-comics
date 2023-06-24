@@ -1,30 +1,262 @@
-.comic {
-  display: grid;
-  grid-template-columns: 30% auto;
-  gap: 40px;
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-  .img-area {
-    padding-top: 150%;
-    position: relative;
+body {
+  background-color: rgba(0, 0, 0, 0.9);
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      left: 0%;
-      top: 0%;
+  // create container
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  //section title
+  .section-title {
+    font-size: 56px;
+    line-height: 1;
+    color: white;
+  }
+
+  //pagination buttons
+  .navigation-button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    outline: none;
+    background-color: rgba(21, 0, 80, .5);
+
+    //active class
+    &.active {
+      background-color: rgba(21, 0, 80, 1);
     }
   }
 
-  .detail {
-    color: white;
+  //header
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.5));
+    z-index: 50;
+
+    //nav
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      // navigation
+      .navigation {
+        display: none;
+
+        @media (min-width:600px) {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+      }
+
+      .hamburger-toggler {
+        display: block;
+
+        @media (min-width:600px) {
+          display: none;
+        }
+      }
+    }
+
+    .logo {
+      text-decoration: none;
+      color: white;
+      font-size: 20px;
+      font-family: 'Comic Neue', cursive !important;
+
+      @media (min-width:600px) {
+        font-size: 32px;
+      }
+    }
+  }
+
+  // featured comics
+  .special-comic {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 40px;
+    align-items: flex-start;
+
+    @media (min-width:700px) {
+      grid-template-columns: 50% auto;
+    }
+
+    @media (min-width:900px) {
+      grid-template-columns: 30% auto;
+    }
+
+    // featured comics img
+    .img-area {
+      padding-top: 150%;
+      position: relative;
+
+      @media (min-width:700px) {
+        padding-top: 120%;
+      }
+
+      @media (min-width:900px) {
+        padding-top: 150%;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        left: 0%;
+        top: 0%;
+      }
+    }
+
+    // detail section
+    .detail {
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .creators {
+        .title {
+          font-weight: bold;
+        }
+
+        .list {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          white-space: nowrap;
+          gap: 10px;
+          margin-top: 20px;
+
+          li {
+            background-color: white;
+            color: #000;
+            padding: 10px;
+            border-radius: 9999px;
+            transition: 300ms all;
+
+            &:hover {
+              transform: rotate(-10deg) scale(1.1);
+              box-shadow: 10px 10px 35px -10px rgba($color: #000000, $alpha: 1.0);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // grid area
+  .grid-area {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+
+    @media (min-width:600px) {
+      gap: 20px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (min-width:900px) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    // comics card
+    .comic-card {
+      overflow: hidden;
+      background-color: rgba(0, 0, 0, 0.9);
+      width: 100%;
+      padding-top: 150%;
+      position: relative;
+      transition: 300ms transform;
+
+      &:hover {
+        transform: scale(1.1) translateY(-10px);
+
+        .card-detail {
+          opacity: 1;
+          pointer-events: all;
+          transform: translateY(0);
+        }
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+      }
+
+      // detail section
+      .card-detail {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        transition: 300ms all;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        color: white;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        transform: translateY(100%);
+        gap: 5px;
+
+        a {
+          color: white;
+          padding: 5px;
+        }
+      }
+
+      // add favorite icon
+      .fav-icon {
+        position: absolute;
+        font-size: 30px;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        color: #FF2171;
+        font-weight: 100;
+        cursor: pointer;
+      }
+    }
+  }
+
+  // if there are no previously favorited comics
+  .isNull {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
   }
 }
 
+
+
+// spinner
 .lds-ripple {
   display: inline-block;
   position: relative;
@@ -77,3 +309,5 @@
     opacity: 0;
   }
 }
+
+// spinner

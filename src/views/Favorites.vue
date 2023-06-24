@@ -1,12 +1,14 @@
 <template>
-  {{ favorites.length }}
   <div v-if="!favorites.length == 0">
+    <div class="container">
+      <h2 class="section-title">Favorites</h2>
+    </div>
     <div class="container grid-area">
       <ComicCard v-for="comic in favorites" :key="comic.id" :comic="comic" />
     </div>
   </div>
   <div class="container isNull" v-else>
-    Henüz favoriye bir ürün eklemediniz...
+    You haven't added a comics to your favorites yet...
   </div>
 </template>
 <script>
@@ -23,13 +25,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.isNull {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-}
-</style>

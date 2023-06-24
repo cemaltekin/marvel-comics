@@ -6,52 +6,51 @@
         <NavigationButton to="/" text="Homepage" />
         <NavigationButton to="/favorites" text="Favorites" />
       </div>
+      <font-awesome-icon
+        icon="fa-solid fa-bars"
+        style="color: white"
+        class="hamburger-toggler"
+        @click="handleHambuger"
+      />
     </div>
   </header>
+  <transition name="hamburger">
+    <HamburgerMenu v-if="hamburgerIsVisible" />
+  </transition>
 </template>
 <script>
 import NavigationButton from './NavigationButton.vue';
-
+import HamburgerMenu from '@/components/HamburgerMenu.vue'
+import { mapState } from 'vuex';
 export default {
+  computed: {
+    ...mapState(['hamburgerIsVisible']),
+  },
   components: {
-    NavigationButton
+    NavigationButton,
+    HamburgerMenu
+  },
+  methods: {
+    handleHambuger() {
+      console.log(this.hamburgerIsVisible);
+      this.$store.commit("setHamburgerIsVisible", true);
+    }
   }
 };
 </script>
-<style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 0;
-  @media (min-width: 1024px) {
-    padding: 0;
-  }
+
+<style>
+.hamburger-enter-active {
+  transition: all .2s ease-out;
 }
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 20px 0;
-  background: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.5));
-  z-index: 50;
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    .navigation {
-      display: flex;
-      align-content: center;
-      gap: 20px;
-    }
-  }
-  .logo {
-    text-decoration: none;
-    color: white;
-    font-size: clamp(2.8rem, 1.5vw, 3rem);
-    font-family: 'Comic Neue', cursive !important;
-  }
+
+.hamburger-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.hamburger-enter-from,
+.hamburger-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
 }
 </style>

@@ -35,8 +35,8 @@ export default {
     fetchComicDetail() {
       const comicId = this.$route.params.id;
 
-      const publicKey = 'd34ea269d99edbd46f157b69213c4415'; // API anahtarınızı buraya yerleştirin
-      const privateKey = 'aea8eaf50fc8406cc7019c004fdb6da827e1b101'; // Özel anahtarınızı buraya yerleştirin
+      const publicKey = 'd34ea269d99edbd46f157b69213c4415';
+      const privateKey = 'aea8eaf50fc8406cc7019c004fdb6da827e1b101';
       const timestamp = Math.floor(Date.now() / 1000).toString();
       const hash = md5(timestamp + privateKey + publicKey);
       const apiUrl = `http://gateway.marvel.com/v1/public/comics/${comicId}`;

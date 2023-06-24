@@ -1,13 +1,106 @@
-.comic {
-  display: grid;
-  grid-template-columns: 30% auto;
-  gap: 40px;
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+body {
+  background-color: rgba(0, 0, 0, 0.9);
 }
-.comic .img-area {
+body .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+body .section-title {
+  font-size: 56px;
+  line-height: 1;
+  color: white;
+}
+body .navigation-button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  outline: none;
+  background-color: rgba(21, 0, 80, 0.5);
+}
+body .navigation-button.active {
+  background-color: rgb(21, 0, 80);
+}
+body header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.5));
+  z-index: 50;
+}
+body header .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+body header .nav .navigation {
+  display: none;
+}
+@media (min-width: 600px) {
+  body header .nav .navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
+body header .nav .hamburger-toggler {
+  display: block;
+}
+@media (min-width: 600px) {
+  body header .nav .hamburger-toggler {
+    display: none;
+  }
+}
+body header .logo {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-family: "Comic Neue", cursive !important;
+}
+@media (min-width: 600px) {
+  body header .logo {
+    font-size: 32px;
+  }
+}
+body .special-comic {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 40px;
+  align-items: flex-start;
+}
+@media (min-width: 700px) {
+  body .special-comic {
+    grid-template-columns: 50% auto;
+  }
+}
+@media (min-width: 900px) {
+  body .special-comic {
+    grid-template-columns: 30% auto;
+  }
+}
+body .special-comic .img-area {
   padding-top: 150%;
   position: relative;
 }
-.comic .img-area img {
+@media (min-width: 700px) {
+  body .special-comic .img-area {
+    padding-top: 120%;
+  }
+}
+@media (min-width: 900px) {
+  body .special-comic .img-area {
+    padding-top: 150%;
+  }
+}
+body .special-comic .img-area img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -16,11 +109,116 @@
   left: 0%;
   top: 0%;
 }
-.comic .detail {
-  color: white;
+body .special-comic .detail {
+  color: #fff;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+body .special-comic .detail .creators .title {
+  font-weight: bold;
+}
+body .special-comic .detail .creators .list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+body .special-comic .detail .creators .list li {
+  background-color: white;
+  color: #000;
+  padding: 10px;
+  border-radius: 9999px;
+  transition: 300ms all;
+}
+body .special-comic .detail .creators .list li:hover {
+  transform: rotate(-10deg) scale(1.1);
+  box-shadow: 10px 10px 35px -10px black;
+}
+body .grid-area {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (min-width: 600px) {
+  body .grid-area {
+    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  body .grid-area {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+body .grid-area .comic-card {
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  padding-top: 150%;
+  position: relative;
+  transition: 300ms transform;
+}
+body .grid-area .comic-card:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+body .grid-area .comic-card:hover .card-detail {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+body .grid-area .comic-card img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body .grid-area .comic-card .card-detail {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transition: 300ms all;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  transform: translateY(100%);
+  gap: 5px;
+}
+body .grid-area .comic-card .card-detail a {
+  color: white;
+  padding: 5px;
+}
+body .grid-area .comic-card .fav-icon {
+  position: absolute;
+  font-size: 30px;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  color: #FF2171;
+  font-weight: 100;
+  cursor: pointer;
+}
+body .isNull {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
 }
 
 .lds-ripple {
